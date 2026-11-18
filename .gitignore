@@ -1,0 +1,9 @@
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+*.mp4
+__pycache__/
