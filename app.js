@@ -27,7 +27,6 @@ function showRegionViews(study) {
 $('regionSelect').onchange = event => switchSeries(regions.get(event.target.value)[0].id);
 async function switchSeries(id){
  const next=series.find(s=>s.id===id);if(!next)return;
- if(typeof resetMobileInteraction==='function')resetMobileInteraction();
  seriesPositions.set(activeSeries.id,index);++request;activeSeries=next;views=next.views;
  $('viewer').setAttribute('data-study',id);
  const details=$('anchorDetails'), footer=$('seriesTitle').parentElement;
@@ -102,7 +101,6 @@ let contrastMode=false,contrast=100,brightness=0;
 const windowPresets=[{name:'Soft tissue',width:400,level:40},{name:'Liver',width:150,level:70},{name:'Lung',width:1500,level:-600},{name:'Bone',width:2000,level:400},{name:'Brain',width:80,level:40},{name:'Angio',width:600,level:150}];
 function windowSettings(){return {width:40000/contrast,level:40-brightness*4}}
 function updateWindowReadout(){
- if(typeof updateMobileControls==='function')updateMobileControls();
  const {width,level}=windowSettings();$('sliceReadout').textContent=activeSeries.id==='cardiac'?views[index].counter:`${index+1} / ${views.length}`;$('sliceReadout').title=activeSeries.recoveredViews?`Recovered view ${index+1} of ${views.length}. Recorded counter: ${views[index].source_counter}. ${views[index].source_status==='verified'?'':'Brief or ambiguous source capture.'}`:activeSeries.id==='cardiac'?`${index+1} of ${views.length} recovered views; original recorded counter`:'';
  $('wlReadout').textContent=`W ${Math.round(width)} · L ${Math.round(level)}`;
  $('windowWidth').value=Math.round(width);$('windowLevel').value=Math.round(level);
@@ -259,7 +257,6 @@ function load(i) {
 }
 const headDisplayOffsets={S1_AX_005:[8,7],S1_AX_012:[-4,25],S1_AX_016:[24,25],S1_AX_021:[16,-6]};
 function fit(){
- if(typeof fitMobileView==='function' && fitMobileView())return;
  if(activeSeries.id!=='abdomen'){
   const r=$('viewer').getBoundingClientRect(),stageWidth=activeSeries.stageWidth||(activeSeries.id==='cardiac'?1553:1562),stageHeight=activeSeries.stageHeight||(activeSeries.id==='cardiac'?691:660);
   const scale=Math.min(r.width/stageWidth,r.height/stageHeight);
@@ -341,12 +338,12 @@ function move(n){show(n)}
 $('labels').onclick=()=>{$('drawer').hidden=!$('drawer').hidden;if(!$('drawer').hidden)$('search').focus()};$('closeLabels').onclick=()=>{$('drawer').hidden=true;$('labels').focus()};$('search').oninput=renderLabels;
 $('about').onclick=()=>$('info').showModal();$('closeInfo').onclick=$('startExploring').onclick=()=>$('info').close();
 $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen()}catch{toast('Fullscreen is unavailable in this preview. Open the demo in a browser tab.')}};
-$('fit').onclick=()=>{zoom=1;panX=panY=0;fit()};function changeZoom(d){zoom=Math.max(1,Math.min(typeof mobileZoomLimit==='function'?mobileZoomLimit():3,zoom+d));if(zoom===1)panX=panY=0;$('fit').textContent=zoom===1?'Fit':Math.round(zoom*100)+'%';fit()}
+$('fit').onclick=()=>{zoom=1;panX=panY=0;fit()};function changeZoom(d){zoom=Math.max(1,Math.min(3,zoom+d));if(zoom===1)panX=panY=0;$('fit').textContent=zoom===1?'Fit':Math.round(zoom*100)+'%';fit()}
 $('zoomIn').onclick=()=>changeZoom(.25);$('zoomOut').onclick=()=>changeZoom(-.25);$('fit').addEventListener('click',()=>$('fit').textContent='Fit');
 let lastWheel=0;$('viewer').addEventListener('wheel',e=>{e.preventDefault();if(e.ctrlKey){changeZoom(e.deltaY<0?.1:-.1);return}if(performance.now()-lastWheel<75)return;lastWheel=performance.now();move(target+(e.deltaY>0?1:-1))},{passive:false});
-$('viewer').addEventListener('pointerdown',e=>{if(e.pointerType==='touch')return;if(e.button!==0||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,px:panX,py:panY,contrast,brightness,adjust:contrastMode};$('viewer').setPointerCapture(e.pointerId);$('canvas').classList.add('dragging')});
-$('viewer').addEventListener('pointermove',e=>{if(e.pointerType==='touch')return;if(!drag)return;if(drag.adjust){contrast=drag.contrast+(e.clientX-drag.x)*.6;brightness=drag.brightness-(e.clientY-drag.y)*.3;applyContrast();return}if(zoom===1)return;panX=drag.px+e.clientX-drag.x;panY=drag.py+e.clientY-drag.y;fit()});
-$('viewer').addEventListener('pointerup',e=>{if(e.pointerType==='touch')return;if(drag&&!drag.adjust&&zoom===1&&Math.abs(e.clientY-drag.y)>30)move(target+(e.clientY<drag.y?1:-1));drag=null;$('canvas').classList.remove('dragging')});$('viewer').addEventListener('pointercancel',e=>{if(e.pointerType==='touch')return;drag=null;$('canvas').classList.remove('dragging')});
+$('viewer').addEventListener('pointerdown',e=>{if(e.button!==0||e.target.closest('button'))return;drag={x:e.clientX,y:e.clientY,px:panX,py:panY,contrast,brightness,adjust:contrastMode};$('viewer').setPointerCapture(e.pointerId);$('canvas').classList.add('dragging')});
+$('viewer').addEventListener('pointermove',e=>{if(!drag)return;if(drag.adjust){contrast=drag.contrast+(e.clientX-drag.x)*.6;brightness=drag.brightness-(e.clientY-drag.y)*.3;applyContrast();return}if(zoom===1)return;panX=drag.px+e.clientX-drag.x;panY=drag.py+e.clientY-drag.y;fit()});
+$('viewer').addEventListener('pointerup',e=>{if(drag&&!drag.adjust&&zoom===1&&Math.abs(e.clientY-drag.y)>30)move(target+(e.clientY<drag.y?1:-1));drag=null;$('canvas').classList.remove('dragging')});$('viewer').addEventListener('pointercancel',()=>{drag=null;$('canvas').classList.remove('dragging')});
 document.addEventListener('keydown',e=>{if(e.target.matches('input,select,textarea')||$('info').open)return;if(e.code==='Escape'){if($('windowPresets').open){$('windowPresets').open=false;$('presetTrigger').focus();return}$('drawer').hidden=true;setContrastMode(false);clearAnchor();return}if(e.target.closest('button')&&(e.code==='Space'||e.code==='Enter'))return;if(['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Home','End'].includes(e.code))e.preventDefault();if(e.code==='ArrowRight'||e.code==='ArrowDown')move(target+1);if(e.code==='ArrowLeft'||e.code==='ArrowUp')move(target-1);if(e.code==='Home')move(0);if(e.code==='End')move(views.length-1)});
 new ResizeObserver(fit).observe($('viewer'));fit();switchSeries(new URLSearchParams(location.search).get('series')||'abdomen');
 

@@ -5,18 +5,18 @@
   "files": [
     {
       "path": ".gitattributes",
-      "bytes": 128,
-      "sha256": "8f106fbcf1c3883127c69fbaa2a50f1bad80ec48e8a270b8679be1999c2569cf"
+      "bytes": 136,
+      "sha256": "ffc169e6eac7747939c4a45beb1881b8b872f6c50af191f3dc2a8d7bf9f6f6fc"
     },
     {
       "path": ".gitignore",
-      "bytes": 77,
-      "sha256": "65049406710aff39a45825f96cd7129427f92a6d712bfebfeb43872327a613a3"
+      "bytes": 86,
+      "sha256": "738867ac505dce0f7689baf17049b289290a3fb2cb0c451ba9950f92cc185de8"
     },
     {
       "path": ".nojekyll",
-      "bytes": 1,
-      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+      "bytes": 2,
+      "sha256": "7eb70257593da06f682a3ddda54a9d260d4fc514f645237f5ca74b08f8da61a6"
     },
     {
       "path": "anatomy-descriptions.js",
@@ -30,8 +30,8 @@
     },
     {
       "path": "app.js",
-      "bytes": 30979,
-      "sha256": "216c80a4d050e700aa924b390cc090125d5a5f6b88683447dd83c6da848f9c7e"
+      "bytes": 30932,
+      "sha256": "4207ba8078f33add5aa55aac48e3d20735ee734b8f0245503e99acb33133e6be"
     },
     {
       "path": "ATTRIBUTION.md",
@@ -3485,8 +3485,8 @@
     },
     {
       "path": "index.html",
-      "bytes": 9141,
-      "sha256": "30a5525225b65837c54674493adcda199d30919672089a3275a501b490a5c3a9"
+      "bytes": 9145,
+      "sha256": "c89443edee73162d055190581c42beaccbc101592ed815761b1a2bca7e3f1389"
     },
     {
       "path": "mark-cleanup.js",
@@ -7655,8 +7655,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 6626,
-      "sha256": "11cb67a6c50d14c9f0c51194bb398ebf79fc52cadaf2c8315ff16765b60d85c7"
+      "bytes": 6720,
+      "sha256": "d97a4d1436591486149d684a46735197a95ff79d246cb8bdd8ec29772c0dabf6"
     },
     {
       "path": "recovered-anchors.js",
@@ -7665,8 +7665,8 @@
     },
     {
       "path": "reference-interaction.js",
-      "bytes": 7960,
-      "sha256": "97c21149a5f7d7269be634b5892a6c95045176833de8a0da43ba527d8ffbc513"
+      "bytes": 8071,
+      "sha256": "3f2dcefc619c02ff76332787bffca5615371cca4ca9c21216b2086df06810e2a"
     },
     {
       "path": "scripts/serve.mjs",
@@ -7675,13 +7675,13 @@
     },
     {
       "path": "scripts/verify.mjs",
-      "bytes": 1955,
-      "sha256": "0213fe04851ab4525e3fb0f31e5964d5c6a011efae25940ba8a6b3636ab9aa1b"
+      "bytes": 1605,
+      "sha256": "6e45f9973c5b0cae64e6d2b10463b314d542e7fdabc1e50692c1a3d85cd1dd2a"
     },
     {
       "path": "style.css",
-      "bytes": 33599,
-      "sha256": "25cadf0c3dca54838b407473d0cbd2eb585af564606770650142aaaf13699165"
+      "bytes": 28417,
+      "sha256": "e97b9a44bee8324cdf9b88394ffa105857ae0357d6f73d5c35b315c938cbbdde"
     },
     {
       "path": "window-masks.js",
@@ -7690,33 +7690,23 @@
     },
     {
       "path": "landing.css",
-      "bytes": 6100,
-      "sha256": "cfee32bd1c5fb331231de628339b2016cab63d50893058413a9c8b3bfdb53cff"
+      "bytes": 6102,
+      "sha256": "886328d0e9d2a288f8aaf606c55038c7033e37c8bb015a407439d9d8d48fe673"
     },
     {
       "path": "viewer.html",
-      "bytes": 12950,
-      "sha256": "6d710203bf598602c5d1402342257e3cb86d925b4c0fc84a8669264074fb32ad"
+      "bytes": 12107,
+      "sha256": "1d722b0c90fd40045edbf6edf3698e6a49bc8a6483e9bd0effe48ca3da280d39"
     },
     {
       "path": "recording-overlays.js",
-      "bytes": 20190,
-      "sha256": "bf7f924bc4309c17484c7b53d4840aff39932916e41e8f8b2a6fca231e22653f"
+      "bytes": 20234,
+      "sha256": "a725f8b7471d2fba001f09fdff5ebc16005b0a724896ac58d6718bcdce6250c2"
     },
     {
       "path": "chest-coronal-display.js",
-      "bytes": 465910,
-      "sha256": "1f241a8e9b3f490f167cbe4924cf596bb191fe8b6b6a976619c452b810664e10"
-    },
-    {
-      "path": "mobile-viewer.js",
-      "bytes": 9907,
-      "sha256": "74780ba778e2010753af8523bb1d7e262685c25b2da52ecb00f67a024ac2be12"
-    },
-    {
-      "path": "scripts/check-mobile.mjs",
-      "bytes": 10298,
-      "sha256": "f974002062ae5b093085a479c3a8abcc96e6349ce0d22c79bcd60e61b4b26714"
+      "bytes": 465956,
+      "sha256": "a7ad290d6ef67c24eacb83a8b506e3304a159dc87681aa4dcff64d352d574937"
     }
   ]
 }
