@@ -194,3 +194,91 @@ footer.seriesFooter{position:relative}
  .study-area .brand-wordmark{display:none}
  .study-pickers{flex:1;width:auto;gap:6px}
 }
+
+/* Mobile-only controls and viewport layout. Desktop sizing stays unchanged. */
+#mobileNavigation{display:none}
+@media(max-width:1040px){
+ body{height:100vh;height:100dvh;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+ .toolbar{height:auto;min-height:0;padding:8px 12px;gap:6px;flex-shrink:0}
+ .study-area{gap:12px;min-width:0}
+ .study-pickers{width:auto;flex:1;max-width:620px}
+ .study-pickers select:is(#regionSelect,#seriesSelect){min-height:44px;padding-top:9px;padding-bottom:9px}
+ .study-select-wrap>.chevron{top:14px}
+ .toolgroup{justify-content:flex-end;gap:6px;min-width:0}
+ .toolbar button,#presetTrigger{height:44px;min-height:44px}
+ .zoom-controls button{width:40px;min-height:42px;height:42px}
+ .zoom-controls #fit{min-width:44px}
+ .toolbar .divider{display:none}
+ .toolbar #labels{display:inline-flex!important;min-width:44px}
+ #labels>span,#labels>.ui-icon{display:none}
+ #labels::after{content:'Labels'}
+ #presetTrigger{max-width:180px}
+ #presetName{overflow:hidden;text-overflow:ellipsis}
+ #viewer{width:100%;min-height:80px;flex:1 1 0;overscroll-behavior:contain}
+ #mobileNavigation{display:grid;flex-shrink:0;padding:4px 12px 6px;gap:3px;background:#0c141e;border-top:1px solid #243849}
+ .mobile-view-tools,.mobile-slices{display:flex;align-items:center;gap:8px;min-width:0}
+ #mobileNavigation button{min-height:44px;font-size:9px;touch-action:manipulation;white-space:nowrap}
+ #mobileOverview{min-width:88px}
+ #mobileOverview[aria-pressed=true]{border-color:#75d5e7;background:#15384b}
+ #mobileFit{min-width:44px}
+ #mobileFullscreen{margin-left:auto}
+ #touchHint{font-size:8px;color:#90a9b9;margin-left:auto}
+ #previousView,#nextView{width:44px;flex-shrink:0;font-family:Arial,sans-serif!important;font-size:25px!important}
+ #mobilePosition{font-size:9px;white-space:nowrap;min-width:66px;text-align:center;color:#b5d3e5;font-variant-numeric:tabular-nums}
+ #mobileSlice{flex:1;min-width:0;height:44px;margin:0;touch-action:pan-x}
+ footer.seriesFooter{min-height:28px;padding:5px 12px;gap:6px;justify-content:flex-start}
+ .seriesFooter strong{font-size:7px;max-width:calc(100% - 70px);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #sourceCredits{bottom:7px;right:12px}
+ #windowReadout{right:4px;bottom:3px;font-size:8px;padding:3px 6px}
+ #windowReadout small{font-size:6px}
+ #anchorDetails{top:6px;left:6px;padding:6px 8px;max-width:calc(100% - 12px)}
+ #anchorName{font-size:10px}#clearAnchor{min-height:36px;min-width:36px}
+ .seriesFooter #anchorDetails{max-width:calc(100% - 70px)}
+ .seriesFooter #anchorDetails>div{min-width:0}
+ #drawer:not([hidden]){display:block!important;top:var(--mobile-toolbar-height,110px);bottom:env(safe-area-inset-bottom);width:min(340px,100%);padding:16px;z-index:9}
+ #drawer button{min-height:44px}
+ #search{font-size:16px}
+ #contrastPanel{top:calc(var(--mobile-toolbar-height,110px) + 6px);right:max(8px,env(safe-area-inset-right));max-height:calc(100dvh - var(--mobile-toolbar-height,110px) - 20px);overflow:auto;overscroll-behavior:contain}
+ #contrastPanel input[type=range]{height:28px}
+ #presetOptions{z-index:10;max-height:calc(100dvh - var(--mobile-toolbar-height,110px) - 10px);overflow-y:auto;right:0}
+ #presetOptions button{min-height:44px}
+ #anatomyDescription{top:auto;bottom:0;width:100%;height:40dvh;max-height:40dvh;padding:16px 20px;border-left:0;border-top:1px solid #2b4355;z-index:10}
+ .anatomy-guide-open #viewer{margin-right:0;margin-bottom:0}
+ .anatomy-guide-open #mobileNavigation{margin-bottom:40dvh}
+ .mobile-immersive .toolbar,:fullscreen .toolbar{display:none}
+ .mobile-immersive footer.seriesFooter,:fullscreen footer.seriesFooter{display:none}
+ .mobile-immersive #contrastPanel,:fullscreen #contrastPanel{top:8px}
+ .mobile-immersive #touchHint,:fullscreen #touchHint{display:none}
+}
+@media(max-width:620px){
+ .toolbar{padding:6px 8px}
+ .toolbar .brand{display:none}
+ .study-pickers{gap:6px}
+ .study-pickers select:is(#regionSelect,#seriesSelect){font-size:9px}
+ .toolgroup{justify-content:space-between;gap:4px}
+ .toolbar #contrastTool{width:40px;padding:0}
+ #contrastTool>span{display:none}
+ #presetTrigger{padding:0 6px;max-width:125px;font-size:8px}
+ #presetTrigger>.ui-icon:first-child{display:none}
+ .toolbar #labels{padding:0 7px;font-size:8px}
+ #touchHint{display:none}
+ #mobileNavigation{padding-left:8px;padding-right:8px}
+ .mobile-view-tools,.mobile-slices{gap:6px}
+ #mobileFullscreen{font-size:8px}
+}
+@media(max-width:1040px) and (max-height:500px){
+ .toolbar{padding:4px 8px;flex-wrap:nowrap;gap:8px}
+ .study-area{width:auto;flex:1}.study-area .brand{display:none}
+ .study-pickers{width:100%;gap:5px}
+ .toolgroup{width:auto;gap:4px}
+ .study-pickers select:is(#regionSelect,#seriesSelect){font-size:8px;padding-left:5px}
+ #contrastTool>span,#presetTrigger>.ui-icon:first-child{display:none}
+ #presetTrigger{max-width:100px;padding:0 5px;font-size:8px}
+ .toolbar #labels{padding:0 6px;font-size:8px}
+ .zoom-controls button{width:32px}.zoom-controls #fit{min-width:36px}
+ #mobileNavigation{grid-template-columns:auto minmax(0,1fr);gap:12px;padding:3px 8px}
+ #mobilePosition{min-width:60px}#touchHint{display:none}
+ footer.seriesFooter{display:none}
+ .anatomy-guide-open #mobileNavigation{margin-bottom:0}
+ #anatomyDescription{top:0;bottom:0;right:0;width:min(320px,50vw);height:100dvh;max-height:100dvh}
+}

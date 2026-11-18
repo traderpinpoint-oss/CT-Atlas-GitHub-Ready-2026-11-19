@@ -8,7 +8,11 @@ const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const read=name=>fs.readFileSync(path.join(root,name));
 const manifest=JSON.parse(read('asset-manifest.json'));
 for(const item of manifest.files){
-  const contents=read(item.path);
+  const raw=read(item.path);
+  // Git normalizes text on commit; Windows checkouts may use CRLF. Keep
+  // image bytes exact while verifying text against its canonical LF form.
+  const contents=/\.(?:m?js|json|css|html|md)$|^\.(?:gitattributes|gitignore|nojekyll)$/.test(item.path)
+    ? Buffer.from(raw.toString().replace(/\r\n/g,'\n')) : raw;
   assert.equal(contents.length,item.bytes,`Size mismatch: ${item.path}`);
   assert.equal(crypto.createHash('sha256').update(contents).digest('hex'),item.sha256,`Changed or corrupted: ${item.path}`);
 }
@@ -20,7 +24,7 @@ assert.equal(series.length,15);
 let count=0;
 for(const s of series)for(const view of s.views){assert.ok(fs.existsSync(path.join(root,view.image)),`Missing image: ${view.image}`);count++;}
 assert.equal(count,1509);
-for(const [,url] of read('index.html').toString().matchAll(/(?:src|href)="([^"#]+)"/g)){
+for(const page of ['index.html','viewer.html'])for(const [,url] of read(page).toString().matchAll(/(?:src|href)="([^"#]+)"/g)){
   if(/^(?:https?:|data:)/.test(url))continue;
   assert.ok(fs.existsSync(path.join(root,url.split('?')[0])),`Missing HTML dependency: ${url}`);
 }
